@@ -1,5 +1,5 @@
 import React, {useState, useRef, useCallback} from 'react';
-import useBookSearch from '@app/hooks/useBookSearch';
+import useBookSearch from 'hooks/useBookSearch';
 
 function App() {
   const [query, setQuery] = useState<string>('');
@@ -33,9 +33,10 @@ function App() {
         type="text" 
         name="search-field" 
         id="search-field" 
-        placeholder='Type your search here'
+        placeholder='Type your book search here'
         onChange={handleSearch}
         value={query}
+        data-testid="search-input-field"
       />
       {
         books.map((book, index) => {
@@ -56,6 +57,8 @@ function App() {
               <div>
                 <p>Downloaded: {book.download_count} times.</p>
               </div>
+
+              <hr />
             </div>;
           } else {
             return <div key={book.id} className="card">
@@ -74,6 +77,8 @@ function App() {
               <div>
                 <p>Downloaded: {book.download_count} times.</p>
               </div>
+
+              <hr />
             </div>;
           }
         })
