@@ -28,33 +28,43 @@ interface UsebooksSearch {
   hasMore: boolean;
 }
 
-export default function useBookSearch(
-  {query, pageNumber}: {query: string | undefined, pageNumber: number | undefined}
-): UsebooksSearch {
+export default function useBookSearch({
+  query,
+  pageNumber,
+}: {
+  query: string | undefined;
+  pageNumber: number | undefined;
+}): UsebooksSearch {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [books, setBooks] = useState<Book[]>([]);
   const [hasMore, setHasMore] = useState<boolean>(false);
 
-  const getBooks = useCallback(({axiosSource}: {axiosSource: CancelTokenSource}) => {
-    setLoading(true);
-    setError(false);
+  const getBooks = useCallback(
+    ({axiosSource}: {axiosSource: CancelTokenSource}) => {
+      setLoading(true);
+      setError(false);
 
-    axios({
-      method: 'GET',
-      url: 'https://gutendex.com/books',
-      params: {search: query, page: pageNumber},
-      cancelToken: axiosSource.token
-    }).then(res => {
-      setBooks(prevBooks => {
-        return [...prevBooks, ...res.data.results];
-      });
-      setHasMore(!!res.data.next);
-    }).catch(err => {
-      if (axios.isCancel(err)) return;
-      setError(true);
-    }).finally(() => setLoading(false));
-  }, [query, pageNumber]);
+      axios({
+        method: 'GET',
+        url: 'https://gutendex.com/books',
+        params: {search: query, page: pageNumber},
+        cancelToken: axiosSource.token,
+      })
+        .then(res => {
+          setBooks(prevBooks => {
+            return [...prevBooks, ...res.data.results];
+          });
+          setHasMore(!!res.data.next);
+        })
+        .catch(err => {
+          if (axios.isCancel(err)) return;
+          setError(true);
+        })
+        .finally(() => setLoading(false));
+    },
+    [query, pageNumber],
+  );
 
   useEffect(() => {
     setBooks([]);
@@ -68,11 +78,11 @@ export default function useBookSearch(
 
     return () => source.cancel('Operation canceled by the user.');
   }, [query, pageNumber, getBooks]);
-  
+
   return {
     loading,
     error,
     books,
-    hasMore
+    hasMore,
   };
 }

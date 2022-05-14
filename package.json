@@ -23,8 +23,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --env=jsdom",
+    "test-cov": "react-scripts test --env=jsdom --coverage --watchAll",
+    "eject": "react-scripts eject",
+    "format": "prettier --ignore-path .gitignore --write ."
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +53,7 @@
     "@typescript-eslint/parser": "^5.23.0",
     "eslint-plugin-react": "^7.29.4",
     "jest": "^28.1.0",
+    "prettier": "^2.6.2",
     "ts-node": "^10.7.0"
   }
 }

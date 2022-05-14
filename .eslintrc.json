@@ -1,53 +1,49 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended"
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "react-hooks", "@typescript-eslint"],
+  "rules": {
+    "semi": [2, "always"],
+    "space-before-function-paren": [
+      2,
+      {
+        "anonymous": "never",
+        "named": "never"
+      }
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "react-hooks",
-        "@typescript-eslint"
+    "object-curly-spacing": ["error", "never"],
+    "react/self-closing-comp": 1,
+    "react/jsx-curly-brace-presence": 1,
+    "no-useless-constructor": 1,
+    "camelcase": 0,
+    "no-unused-expressions": 0,
+    "no-restricted-imports": [
+      2,
+      {
+        "patterns": ["../../*"]
+      }
     ],
-    "rules": {
-        "semi": [2, "always"],
-        "space-before-function-paren": [
-          2,
-          {
-            "anonymous": "never",
-            "named": "never"
-          }
-        ],
-        "object-curly-spacing": ["error", "never"],
-        "react/self-closing-comp": 1,
-        "react/jsx-curly-brace-presence": 1,
-        "no-useless-constructor": 1,
-        "camelcase": 0,
-        "no-unused-expressions": 0,
-        "no-restricted-imports": [
-          2,
-          {
-            "patterns": ["../../*"]
-          }
-        ],
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
-        "react/no-did-update-set-state": "warn",
-        "react/jsx-handler-names": "warn",
-        "react/jsx-pascal-case": "warn",
-        "react/display-name": "warn",
-        "react/prop-types": 0
-    }
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/no-did-update-set-state": "warn",
+    "react/jsx-handler-names": "warn",
+    "react/jsx-pascal-case": "warn",
+    "react/display-name": "warn",
+    "react/prop-types": 0
+  }
 }
